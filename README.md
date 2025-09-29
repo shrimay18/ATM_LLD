@@ -66,7 +66,7 @@ The ATM system implements the **State Pattern** to manage its behavior across di
 
 ## Project Structure
 
-
+```
 ├── Main.java
 ├── atm/
 │   ├── ATM.java
@@ -86,13 +86,13 @@ The ATM system implements the **State Pattern** to manage its behavior across di
     ├── DepositSlot.java
     ├── PinInput.java
     └── Printer.java
-
+```
 
 ## UML Diagrams
 
 ### Class Diagram
 
-mermaid
+```mermaid
 classDiagram
     class ATM {
         -ATMState currentState
@@ -227,11 +227,11 @@ classDiagram
     
     Bank --> Account
     Account --> Transaction
-
+```
 
 ### State Transition Diagram
 
-mermaid
+```mermaid
 stateDiagram-v2
     [*] --> IdleState
     IdleState --> HasCardState: Card Inserted
@@ -243,11 +243,11 @@ stateDiagram-v2
     PinEnteredState --> ExitState: Exit
     TransactionState --> PinEnteredState: Transaction Complete
     ExitState --> [*]
-
+```
 
 ### Sequence Diagram - Withdrawal Flow
 
-mermaid
+```mermaid
 sequenceDiagram
     participant User
     participant ATM
@@ -286,7 +286,7 @@ sequenceDiagram
     TransactionState->>Printer: printTransaction()
     Printer-->>User: Print receipt
     ATM->>PinEnteredState: setState()
-
+```
 
 ## Installation
 
@@ -300,23 +300,23 @@ sequenceDiagram
 1. Clone or download the project files
 
 2. Ensure the directory structure matches the package declarations:
-   
+   ```
    src/
    ├── Main.java
    ├── atm/
    ├── bank/
    └── components/
-   
+   ```
 
 3. Compile the project:
-   bash
-   javac Main.java atm/.java bank/.java components/*.java
-   
+   ```bash
+   javac Main.java atm/*.java bank/*.java components/*.java
+   ```
 
 4. Run the application:
-   bash
+   ```bash
    java Main
-   
+   ```
 
 ## Usage
 
@@ -438,7 +438,7 @@ The system comes with two pre-configured accounts:
 
 ## Example Walkthrough
 
-
+```
 ATM is idle. Please insert your card.
 Enter account number: 12345
 
@@ -472,7 +472,7 @@ Select Option:
 5
 
 Thank you for using the ATM. Goodbye!
-
+```
 
 ## Future Enhancements
 
@@ -522,4 +522,4 @@ This is an educational project demonstrating design patterns and OOP principles.
 
 ---
 
-**Note**: This is a simulation system for educational purposes. It does not connect to real banking systems or handle actual currency.
+**Note**: This is a simulation system for educational purposes. It does not connect to real banking systems or handle actual currency.
