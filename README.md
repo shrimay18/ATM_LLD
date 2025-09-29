@@ -28,7 +28,7 @@ The system follows a modular architecture with three main packages:
 
 ## Project Structure
 
-
+```
 ├── Main.java
 ├── atm/
 │   ├── ATM.java
@@ -48,13 +48,13 @@ The system follows a modular architecture with three main packages:
     ├── DepositSlot.java
     ├── PinInput.java
     └── Printer.java
-
+```
 
 ## UML Diagrams
 
 ### Class Diagram
 
-mermaid
+```mermaid
 classDiagram
     class ATM {
         -ATMState currentState
@@ -189,11 +189,11 @@ classDiagram
     
     Bank --> Account
     Account --> Transaction
-
+```
 
 ### State Transition Diagram
 
-mermaid
+```mermaid
 stateDiagram-v2
     [*] --> IdleState
     IdleState --> HasCardState: Card Inserted
@@ -205,11 +205,11 @@ stateDiagram-v2
     PinEnteredState --> ExitState: Exit
     TransactionState --> PinEnteredState: Transaction Complete
     ExitState --> [*]
-
+```
 
 ### Sequence Diagram - Withdrawal Flow
 
-mermaid
+```mermaid
 sequenceDiagram
     participant User
     participant ATM
@@ -248,8 +248,37 @@ sequenceDiagram
     TransactionState->>Printer: printTransaction()
     Printer-->>User: Print receipt
     ATM->>PinEnteredState: setState()
+```
 
+## Installation
 
+### Prerequisites
+
+- Java Development Kit (JDK) 11 or higher
+- Any Java IDE (IntelliJ IDEA, Eclipse, VS Code) or command line
+
+### Steps
+
+1. Clone or download the project files
+
+2. Ensure the directory structure matches the package declarations:
+   ```
+   src/
+   ├── Main.java
+   ├── atm/
+   ├── bank/
+   └── components/
+   ```
+
+3. Compile the project:
+   ```bash
+   javac Main.java atm/*.java bank/*.java components/*.java
+   ```
+
+4. Run the application:
+   ```bash
+   java Main
+   ```
 
 ## Usage
 
@@ -285,7 +314,7 @@ The system comes with two pre-configured accounts:
 
 ## Example Walkthrough
 
-
+```
 ATM is idle. Please insert your card.
 Enter account number: 12345
 
@@ -319,7 +348,26 @@ Select Option:
 5
 
 Thank you for using the ATM. Goodbye!
+```
 
+## Future Enhancements
+
+- **Multiple Currency Support**: Handle different denominations and currencies
+- **Transaction Limits**: Daily withdrawal and deposit limits
+- **Account Types**: Savings, Checking, Credit accounts
+- **Network Banking**: Connect to actual banking APIs
+- **Card Technology**: Chip and PIN, contactless payments
+- **Receipt Options**: Email or SMS receipts
+- **Multi-language Support**: Internationalization
+- **Security Features**: Account locking after failed attempts, encryption
+- **Advanced Statements**: Date range filtering, detailed transaction reports
+- **Transfer Operations**: Account-to-account transfers
+- **Bill Payments**: Utility bill payment functionality
+- **GUI Interface**: Graphical user interface for better user experience
+- **Logging System**: Comprehensive audit trail and logging
+- **Error Recovery**: Handle edge cases and system failures gracefully
+
+## Technical Notes
 
 ### Constraints
 
@@ -334,3 +382,20 @@ Thank you for using the ATM. Goodbye!
 - Incorrect PIN attempts end the session (single attempt allowed)
 - Insufficient balance prevents withdrawal
 - Invalid menu choices re-display the menu
+
+## Contributing
+
+To extend this system:
+
+1. Add new states by implementing `ATMState` interface
+2. Create new components in the `components` package
+3. Extend `Account` class for new account types
+4. Add transaction types in `Transaction` class
+
+## License
+
+This is an educational project demonstrating design patterns and OOP principles.
+
+---
+
+**Note**: This is a simulation system for educational purposes. It does not connect to real banking systems or handle actual currency.
