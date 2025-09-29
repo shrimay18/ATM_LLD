@@ -17,13 +17,6 @@ This ATM system simulates real-world ATM operations including card authenticatio
 - **Transaction Receipts**: Print receipts for all transactions
 - **State Management**: Seamless state transitions throughout the ATM workflow
 
-## Architecture
-
-The system follows a modular architecture with three main packages:
-
-1. **atm**: Core ATM logic and state management
-2. **bank**: Banking operations and account management
-3. **components**: Hardware component simulations (card reader, cash dispenser, etc.)
 
 
 ## Project Structure
@@ -207,80 +200,6 @@ stateDiagram-v2
     ExitState --> [*]
 ```
 
-### Sequence Diagram - Withdrawal Flow
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant ATM
-    participant IdleState
-    participant CardReader
-    participant Bank
-    participant HasCardState
-    participant PinInput
-    participant PinEnteredState
-    participant TransactionState
-    participant Account
-    participant CashDispenser
-    participant Printer
-
-    User->>ATM: start()
-    ATM->>IdleState: handle()
-    IdleState->>User: Request card
-    User->>CardReader: Insert card (account number)
-    CardReader->>Bank: authenticateAccount()
-    Bank-->>CardReader: true
-    ATM->>HasCardState: setState()
-    HasCardState->>User: Request PIN
-    User->>PinInput: Enter PIN
-    PinInput->>Bank: validatePin()
-    Bank-->>PinInput: true
-    ATM->>PinEnteredState: setState()
-    PinEnteredState->>User: Display menu
-    User->>ATM: Select Withdraw
-    ATM->>TransactionState: setState("withdraw")
-    TransactionState->>User: Request amount
-    User->>TransactionState: Enter amount
-    TransactionState->>Account: withdraw(amount)
-    Account-->>TransactionState: true
-    TransactionState->>CashDispenser: dispenseCash(amount)
-    CashDispenser-->>User: Dispense notes
-    TransactionState->>Printer: printTransaction()
-    Printer-->>User: Print receipt
-    ATM->>PinEnteredState: setState()
-```
-
-## Installation
-
-### Prerequisites
-
-- Java Development Kit (JDK) 11 or higher
-- Any Java IDE (IntelliJ IDEA, Eclipse, VS Code) or command line
-
-### Steps
-
-1. Clone or download the project files
-
-2. Ensure the directory structure matches the package declarations:
-   ```
-   src/
-   ├── Main.java
-   ├── atm/
-   ├── bank/
-   └── components/
-   ```
-
-3. Compile the project:
-   ```bash
-   javac Main.java atm/*.java bank/*.java components/*.java
-   ```
-
-4. Run the application:
-   ```bash
-   java Main
-   ```
-
-## Usage
 
 ### Demo Accounts
 
@@ -350,24 +269,6 @@ Select Option:
 Thank you for using the ATM. Goodbye!
 ```
 
-## Future Enhancements
-
-- **Multiple Currency Support**: Handle different denominations and currencies
-- **Transaction Limits**: Daily withdrawal and deposit limits
-- **Account Types**: Savings, Checking, Credit accounts
-- **Network Banking**: Connect to actual banking APIs
-- **Card Technology**: Chip and PIN, contactless payments
-- **Receipt Options**: Email or SMS receipts
-- **Multi-language Support**: Internationalization
-- **Security Features**: Account locking after failed attempts, encryption
-- **Advanced Statements**: Date range filtering, detailed transaction reports
-- **Transfer Operations**: Account-to-account transfers
-- **Bill Payments**: Utility bill payment functionality
-- **GUI Interface**: Graphical user interface for better user experience
-- **Logging System**: Comprehensive audit trail and logging
-- **Error Recovery**: Handle edge cases and system failures gracefully
-
-## Technical Notes
 
 ### Constraints
 
@@ -383,19 +284,3 @@ Thank you for using the ATM. Goodbye!
 - Insufficient balance prevents withdrawal
 - Invalid menu choices re-display the menu
 
-## Contributing
-
-To extend this system:
-
-1. Add new states by implementing `ATMState` interface
-2. Create new components in the `components` package
-3. Extend `Account` class for new account types
-4. Add transaction types in `Transaction` class
-
-## License
-
-This is an educational project demonstrating design patterns and OOP principles.
-
----
-
-**Note**: This is a simulation system for educational purposes. It does not connect to real banking systems or handle actual currency.
