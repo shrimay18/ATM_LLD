@@ -2,20 +2,6 @@
 
 A comprehensive ATM (Automated Teller Machine) simulation system implemented in Java, demonstrating object-oriented design principles, state pattern, and multi-package architecture.
 
-## Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Architecture](#architecture)
-- [Design Patterns](#design-patterns)
-- [Project Structure](#project-structure)
-- [UML Diagrams](#uml-diagrams)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Class Descriptions](#class-descriptions)
-- [Example Walkthrough](#example-walkthrough)
-- [Future Enhancements](#future-enhancements)
-
 ## Overview
 
 This ATM system simulates real-world ATM operations including card authentication, PIN validation, cash withdrawal, cash deposit, mini statement printing, and PIN change functionality. The system is built using the State design pattern to manage different ATM states and transitions.
@@ -39,30 +25,6 @@ The system follows a modular architecture with three main packages:
 2. **bank**: Banking operations and account management
 3. **components**: Hardware component simulations (card reader, cash dispenser, etc.)
 
-### Key Architectural Principles
-
-- **Separation of Concerns**: Each package handles distinct responsibilities
-- **Encapsulation**: Components are self-contained with clear interfaces
-- **State Pattern**: ATM states are managed through the State design pattern
-- **Single Responsibility**: Each class has a focused purpose
-
-## Design Patterns
-
-### State Pattern
-
-The ATM system implements the **State Pattern** to manage its behavior across different states:
-
-- **IdleState**: Initial state, waiting for card insertion
-- **HasCardState**: Card inserted, awaiting PIN entry
-- **PinEnteredState**: Authenticated, displaying menu options
-- **TransactionState**: Processing withdrawal or deposit
-- **ExitState**: Terminal state, ending the session
-
-**Benefits**:
-- Clean state transitions
-- Eliminates complex conditional logic
-- Easy to add new states
-- Each state encapsulates its own behavior
 
 ## Project Structure
 
@@ -288,35 +250,6 @@ sequenceDiagram
     ATM->>PinEnteredState: setState()
 
 
-## Installation
-
-### Prerequisites
-
-- Java Development Kit (JDK) 11 or higher
-- Any Java IDE (IntelliJ IDEA, Eclipse, VS Code) or command line
-
-### Steps
-
-1. Clone or download the project files
-
-2. Ensure the directory structure matches the package declarations:
-   
-   src/
-   ├── Main.java
-   ├── atm/
-   ├── bank/
-   └── components/
-   
-
-3. Compile the project:
-   bash
-   javac Main.java atm/.java bank/.java components/*.java
-   
-
-4. Run the application:
-   bash
-   java Main
-   
 
 ## Usage
 
@@ -349,92 +282,6 @@ The system comes with two pre-configured accounts:
    - Follow on-screen prompts
    - Receipt will be printed for transactions
    - Return to menu or exit
-
-## Class Descriptions
-
-### ATM Package
-
-**ATM.java**
-- Main orchestrator class
-- Manages all hardware components and bank connection
-- Implements state transitions
-- Entry point for ATM operations
-
-**ATMState.java** (Interface)
-- Defines contract for all state classes
-- Single method: `handle()`
-
-**IdleState.java**
-- Initial state when ATM is waiting
-- Handles card insertion
-- Transitions to HasCardState or ExitState
-
-**HasCardState.java**
-- State after card insertion
-- Manages PIN entry
-- Transitions to PinEnteredState or ExitState
-
-**PinEnteredState.java**
-- Authenticated state showing menu
-- Handles user operation selection
-- Routes to appropriate states based on choice
-
-**TransactionState.java**
-- Processes withdrawal and deposit operations
-- Validates transaction constraints
-- Updates account balance
-- Returns to PinEnteredState
-
-**ExitState.java**
-- Terminal state
-- Displays goodbye message
-- Ends ATM session
-
-### Bank Package
-
-**Bank.java**
-- Manages account collection
-- Handles authentication and PIN validation
-- Maintains reference to active account
-- Provides PIN change functionality
-
-**Account.java**
-- Represents a bank account
-- Manages balance and transactions
-- Implements withdraw/deposit logic
-- Maintains transaction history
-
-**Transaction.java**
-- Represents a single transaction
-- Records type, amount, and timestamp
-- Provides formatted string representation
-
-### Components Package
-
-**CardReader.java**
-- Simulates card reading hardware
-- Accepts account number input
-- Validates account existence
-
-**CashDispenser.java**
-- Simulates cash dispensing mechanism
-- Validates amount (multiples of 100)
-- Calculates optimal note distribution (500, 200, 100)
-
-**DepositSlot.java**
-- Simulates deposit mechanism
-- Processes deposit transactions
-- Updates account balance
-
-**PinInput.java**
-- Handles PIN entry and validation
-- Manages PIN change requests
-- Interfaces with Bank for authentication
-
-**Printer.java**
-- Simulates receipt printer
-- Prints transaction receipts
-- Generates mini statements
 
 ## Example Walkthrough
 
@@ -474,25 +321,6 @@ Select Option:
 Thank you for using the ATM. Goodbye!
 
 
-## Future Enhancements
-
-- **Multiple Currency Support**: Handle different denominations and currencies
-- **Transaction Limits**: Daily withdrawal and deposit limits
-- **Account Types**: Savings, Checking, Credit accounts
-- **Network Banking**: Connect to actual banking APIs
-- **Card Technology**: Chip and PIN, contactless payments
-- **Receipt Options**: Email or SMS receipts
-- **Multi-language Support**: Internationalization
-- **Security Features**: Account locking after failed attempts, encryption
-- **Advanced Statements**: Date range filtering, detailed transaction reports
-- **Transfer Operations**: Account-to-account transfers
-- **Bill Payments**: Utility bill payment functionality
-- **GUI Interface**: Graphical user interface for better user experience
-- **Logging System**: Comprehensive audit trail and logging
-- **Error Recovery**: Handle edge cases and system failures gracefully
-
-## Technical Notes
-
 ### Constraints
 
 - Withdrawal amounts must be multiples of 100
@@ -506,20 +334,3 @@ Thank you for using the ATM. Goodbye!
 - Incorrect PIN attempts end the session (single attempt allowed)
 - Insufficient balance prevents withdrawal
 - Invalid menu choices re-display the menu
-
-## Contributing
-
-To extend this system:
-
-1. Add new states by implementing `ATMState` interface
-2. Create new components in the `components` package
-3. Extend `Account` class for new account types
-4. Add transaction types in `Transaction` class
-
-## License
-
-This is an educational project demonstrating design patterns and OOP principles.
-
----
-
-**Note**: This is a simulation system for educational purposes. It does not connect to real banking systems or handle actual currency.
